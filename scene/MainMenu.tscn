@@ -1,0 +1,112 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://code/MainMenu.cs" type="Script" id=1]
+[ext_resource path="res://scene/GameWorld.tscn" type="PackedScene" id=2]
+[ext_resource path="res://textures/logo.png" type="Texture" id=3]
+[ext_resource path="res://font/default.tres" type="DynamicFont" id=4]
+[ext_resource path="res://theme.tres" type="Theme" id=5]
+[ext_resource path="res://sound/fire_up.wav" type="AudioStream" id=6]
+[ext_resource path="res://sound/player_shoot.wav" type="AudioStream" id=7]
+[ext_resource path="res://sound/enemy_hit.wav" type="AudioStream" id=8]
+[ext_resource path="res://sound/enemy_shoot.wav" type="AudioStream" id=9]
+[ext_resource path="res://sound/fire_down.wav" type="AudioStream" id=10]
+[ext_resource path="res://sound/player_hit.wav" type="AudioStream" id=11]
+
+[node name="MainMenu" type="CenterContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 5 )
+script = ExtResource( 1 )
+menuPath = NodePath("MainMenuContainer")
+gameOverLabelPath = NodePath("MainMenuContainer/GameOverLabel")
+gameScene = ExtResource( 2 )
+enemyHitAudioPlayerPath = NodePath("AudioStreamPlayerEnemyHit")
+enemyShootAudioPlayerPath = NodePath("AudioStreamPlayerEnemyShoot")
+fireDownAudioPlayerPath = NodePath("AudioStreamPlayerFireDown")
+fireUpAudioPlayerPath = NodePath("AudioStreamPlayerFireUp")
+playerHitAudioPlayerPath = NodePath("AudioStreamPlayerPlayerHit")
+playerShootAudioPlayerPath = NodePath("AudioStreamPlayerPlayerShoot")
+
+[node name="MainMenuContainer" type="VBoxContainer" parent="."]
+margin_left = 312.0
+margin_top = 111.0
+margin_right = 712.0
+margin_bottom = 489.0
+rect_min_size = Vector2( 400, 0 )
+custom_constants/separation = 16
+
+[node name="TextureRect" type="TextureRect" parent="MainMenuContainer"]
+margin_right = 400.0
+margin_bottom = 250.0
+rect_min_size = Vector2( 400, 250 )
+texture = ExtResource( 3 )
+stretch_mode = 6
+
+[node name="GameOverLabel" type="Label" parent="MainMenuContainer"]
+margin_top = 266.0
+margin_right = 400.0
+margin_bottom = 282.0
+custom_fonts/font = ExtResource( 4 )
+align = 1
+valign = 1
+autowrap = true
+
+[node name="ButtonEasy" type="Button" parent="MainMenuContainer"]
+margin_top = 298.0
+margin_right = 400.0
+margin_bottom = 314.0
+text = "Easy"
+
+[node name="ButtonNormal" type="Button" parent="MainMenuContainer"]
+margin_top = 330.0
+margin_right = 400.0
+margin_bottom = 346.0
+text = "Normal"
+
+[node name="ButtonHard" type="Button" parent="MainMenuContainer"]
+margin_top = 362.0
+margin_right = 400.0
+margin_bottom = 378.0
+text = "Hard"
+
+[node name="HSeparator" type="HSeparator" parent="MainMenuContainer"]
+visible = false
+margin_top = 394.0
+margin_right = 400.0
+margin_bottom = 398.0
+
+[node name="ButtonExit" type="Button" parent="MainMenuContainer"]
+visible = false
+margin_top = 394.0
+margin_right = 400.0
+margin_bottom = 410.0
+text = "Exit"
+
+[node name="AudioStreamPlayerEnemyHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+bus = "SFX"
+
+[node name="AudioStreamPlayerEnemyShoot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+bus = "SFX"
+
+[node name="AudioStreamPlayerFireDown" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+bus = "SFX"
+
+[node name="AudioStreamPlayerFireUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+bus = "SFX"
+
+[node name="AudioStreamPlayerPlayerHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+bus = "SFX"
+
+[node name="AudioStreamPlayerPlayerShoot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+bus = "SFX"
+
+[connection signal="pressed" from="MainMenuContainer/ButtonEasy" to="." method="_on_ButtonEasy_pressed"]
+[connection signal="pressed" from="MainMenuContainer/ButtonNormal" to="." method="_on_ButtonNormal_pressed"]
+[connection signal="pressed" from="MainMenuContainer/ButtonHard" to="." method="_on_ButtonHard_pressed"]
+[connection signal="pressed" from="MainMenuContainer/ButtonExit" to="." method="_on_ButtonExit_pressed"]
